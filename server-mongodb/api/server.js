@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 
 const server = express();
 server.use(cors());
-server.use(express.json());
 server.use(bodyParser.json());
 
 const { init } = require('./dbConfig');
@@ -28,20 +27,11 @@ server.post('/', async (req, res) => {
 
     try {
         const db = await init();
-        // const dogsData = await db.collection('cohort').find().toArray()
-        // const document = { name: req.body.name, fact: req.body.fact };
-        // const collection = await db.collection('cohort');
 
-        // await collection.insert(document, { w: 1 }, function (err, records) {
-        //console.log("Record added as " + records[0]._id);
-        // });
-
-        const stuff = await req.body.text();
+        // This now recieves req.body
         console.log(`(POST) req.body:`);
-        console.log(stuff);
-        res.send(`(POST) req.body: ${stuff}`);
-        // res.send(req);
-        // res.send(req.body);
+        console.log(req.body);
+        res.send(req.body);
 
     } catch (err) {
         res.send(err);
